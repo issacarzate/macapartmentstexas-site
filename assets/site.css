@@ -127,3 +127,10 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .gallery img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 0.25s ease; }
 .gallery a:hover img { transform: scale(1.04); }
 @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
+
+.jump { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px; }
+.jump a { flex: 1; text-align: center; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 999px; background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.listing { scroll-margin-top: 16px; margin-top: 12px; }
+.price .ask { font-size: 22px; }
+.gallery-note { margin: 4px 0 0; }
+@media (max-width: 420px) { .facts { grid-template-columns: repeat(2, 1fr); } }

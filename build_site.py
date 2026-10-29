@@ -81,97 +81,120 @@ def contact(lng):
 
 FB = "https://www.facebook.com/MacApartmentsTexas/"
 
-PHOTOS = [("kitchen", "Kitchen with stainless steel appliances", "Cocina con electrodomésticos de acero inoxidable"),
-  ("living-kitchen", "Open living area and kitchen", "Sala y cocina abiertas"),
-  ("living-room", "Living room with ceiling fan", "Sala con ventilador de techo"),
-  ("main-bedroom", "Main bedroom with private bathroom and walk-in closet", "Recámara principal con baño propio y vestidor"),
-  ("walk-in-closet", "Walk-in closet", "Vestidor (walk-in closet)"),
-  ("walk-in-shower", "Main bathroom with walk-in shower", "Baño principal con regadera walk-in"),
-  ("washer-dryer", "Washer and dryer in the apartment", "Lavadora y secadora en el departamento"),
-  ("bedroom-2", "Second bedroom", "Segunda recámara"),
-  ("bathroom-2", "Second bathroom with tub", "Segundo baño con tina"),
-  ("kitchen-sink", "Kitchen sink and backsplash", "Fregadero y azulejo de cocina"),
-  ("hallway", "Hallway to the bedrooms", "Pasillo a las recámaras")]
+VETERANS = dict(
+  photos=[("kitchen", "Kitchen with stainless steel appliances", "Cocina con electrodomésticos de acero inoxidable"),
+    ("living-kitchen", "Open living area and kitchen", "Sala y cocina abiertas"),
+    ("living-room", "Living room with ceiling fan", "Sala con ventilador de techo"),
+    ("main-bedroom", "Main bedroom with private bathroom and walk-in closet", "Recámara principal con baño propio y vestidor"),
+    ("walk-in-closet", "Walk-in closet", "Vestidor (walk-in closet)"),
+    ("walk-in-shower", "Main bathroom with walk-in shower", "Baño principal con regadera walk-in"),
+    ("washer-dryer", "Washer and dryer in the apartment", "Lavadora y secadora en el departamento"),
+    ("bedroom-2", "Second bedroom", "Segunda recámara"),
+    ("bathroom-2", "Second bathroom with tub", "Segundo baño con tina"),
+    ("kitchen-sink", "Kitchen sink and backsplash", "Fregadero y azulejo de cocina"),
+    ("hallway", "Hallway to the bedrooms", "Pasillo a las recámaras")],
+  thumb=lambda k: f"{k}-sm.jpg", full=lambda k: f"{k}.jpg",
+  id="veterans", where="3807 S Veterans Blvd, Edinburg, TX 78542", price="$1,100",
+  en=dict(eyebrow="Veterans Blvd · Available now", h="2 bedroom, 2 bathroom apartments",
+    facts=[("2", "bedrooms"), ("2", "bathrooms"), ("≈1,000", "sq ft"), ("2", "carports")],
+    p="Bright apartments with tall ceilings and tile floors throughout, close to shops, schools and markets in Edinburg, minutes from McAllen.",
+    items=["Washer and dryer in the apartment", "Stainless steel appliances", "Central air conditioning", "Tile flooring", "Walk-in closet", "Walk-in shower", "Tall ceilings", "LED lighting", "2 carports", "On-site maintenance", "Pets welcome"],
+    util="Electricity from Magic Valley Electric Cooperative and internet from Spectrum are available."),
+  es=dict(eyebrow="Veterans Blvd · Disponible ahora", h="Departamentos de 2 recámaras y 2 baños",
+    facts=[("2", "recámaras"), ("2", "baños"), ("≈1,000", "pies²"), ("2", "cocheras techadas")],
+    p="Departamentos iluminados con techos altos y piso de loseta en todo el departamento, cerca de tiendas, escuelas y supermercados en Edinburg, a minutos de McAllen.",
+    items=["Lavadora y secadora en el departamento", "Electrodomésticos de acero inoxidable", "Aire acondicionado central", "Piso de loseta", "Vestidor (walk-in closet)", "Regadera walk-in", "Techos altos", "Iluminación LED", "2 cocheras techadas (carports)", "Mantenimiento en el lugar", "Se aceptan mascotas"],
+    util="Hay servicio de electricidad con Magic Valley Electric Cooperative e internet con Spectrum."))
 
-def apts(lng):
+LETICIA = dict(
+  photos=[("living-room", "Living room", "Sala"),
+    ("living-dining", "Living and dining area", "Sala y comedor"),
+    ("dining-kitchen", "Dining area and kitchen", "Comedor y cocina"),
+    ("kitchen", "Kitchen with stainless steel appliances", "Cocina con electrodomésticos de acero inoxidable"),
+    ("main-bedroom", "Main bedroom", "Recámara principal"),
+    ("bedroom-furnished", "Second bedroom", "Segunda recámara"),
+    ("bedroom-2", "Bedroom with ceiling fan", "Recámara con ventilador de techo"),
+    ("bedroom-3", "Bedroom with tray ceiling", "Recámara con techo escalonado"),
+    ("bathroom", "Bathroom with tub", "Baño con tina"),
+    ("bathroom-2", "Second bathroom", "Segundo baño"),
+    ("complex", "The community and parking", "La comunidad y el estacionamiento"),
+    ("street", "Quiet street inside the community", "Calle tranquila dentro de la comunidad"),
+    ("bbq", "Outdoor brick BBQ grill", "Asador de ladrillo al aire libre")],
+  thumb=lambda k: f"leticia-{k}.jpg", full=lambda k: f"leticia-{k}.jpg",
+  id="leticia", where="1103 Leticia St, Edinburg, TX 78542", price=None,
+  en=dict(eyebrow="Leticia St", h="2 bedroom, 2 bathroom apartments with water included",
+    facts=[("2", "bedrooms"), ("2", "bathrooms"), ("798", "sq ft"), ("2", "parking spaces")],
+    p="A quiet single-story community in a prime Edinburg location, with water included in the rent and an outdoor BBQ grill for residents.",
+    items=["Water included", "Stainless steel appliances", "Walk-in closet", "2 on-site parking spaces", "Video surveillance", "Outdoor BBQ grill", "On-site maintenance", "Pets welcome", "Prime location"],
+    util="Water is included. Electricity from Magic Valley Electric Cooperative and internet from Spectrum are available."),
+  es=dict(eyebrow="Leticia St", h="Departamentos de 2 recámaras y 2 baños con agua incluida",
+    facts=[("2", "recámaras"), ("2", "baños"), ("798", "pies²"), ("2", "estacionamientos")],
+    p="Una comunidad tranquila de un solo piso, en una excelente ubicación de Edinburg, con el agua incluida en la renta y asador al aire libre para los residentes.",
+    items=["Agua incluida", "Electrodomésticos de acero inoxidable", "Vestidor (walk-in closet)", "2 lugares de estacionamiento", "Videovigilancia", "Asador al aire libre", "Mantenimiento en el lugar", "Se aceptan mascotas", "Excelente ubicación"],
+    util="El agua está incluida. Hay servicio de electricidad con Magic Valley Electric Cooperative e internet con Spectrum."))
+
+def listing(lng, d):
   r = "" if lng == "en" else "../"
   en = lng == "en"
-  if en:
-    L = dict(eyebrow="Available now", h="2 bedroom, 2 bathroom apartments",
-      where="3807 S Veterans Blvd, Edinburg, TX 78542",
-      price="$1,100", per="per month",
-      facts=[("2", "bedrooms"), ("2", "bathrooms"), ("≈1,000", "sq ft"), ("2", "carports")],
-      p="Bright apartments with tall ceilings and tile floors throughout, close to shops, schools and markets in Edinburg, minutes from McAllen.",
-      gallery="Photos", tap="Tap a photo to see it larger.",
-      feat="What every apartment includes",
-      items=["Washer and dryer in the apartment", "Stainless steel appliances", "Central air conditioning", "Tile flooring", "Walk-in closet", "Walk-in shower", "Tall ceilings", "LED lighting", "2 carports", "On-site maintenance", "Pet friendly"],
-      util="Utilities", util_p="Electricity is available from Magic Valley Electric Cooperative and internet from Spectrum.",
-      plans="Floor plans", p2=("2 bedrooms · 2 bathrooms", "Floor plan of the 2-bedroom apartment"), p3=("3 bedrooms · 2 bathrooms · 1,204 sq ft · ask about availability", "Floor plan of the 3-bedroom apartment"),
-      other="Also on Leticia St", other_p="2-bedroom, 2-bathroom home of about 841 sq ft with a 2-car garage at 1103 Leticia St, Edinburg, TX 78542. Ask about availability.",
-      cta="Schedule a visit", cta_p="Call the office to see the apartment or ask about move-in dates.", call="Call", fb="Follow us on Facebook")
-  else:
-    L = dict(eyebrow="Disponible ahora", h="Departamentos de 2 recámaras y 2 baños",
-      where="3807 S Veterans Blvd, Edinburg, TX 78542",
-      price="$1,100", per="al mes",
-      facts=[("2", "recámaras"), ("2", "baños"), ("≈1,000", "pies²"), ("2", "cocheras techadas")],
-      p="Departamentos iluminados con techos altos y piso de loseta en todo el departamento, cerca de tiendas, escuelas y supermercados en Edinburg, a minutos de McAllen.",
-      gallery="Fotos", tap="Toca una foto para verla más grande.",
-      feat="Lo que incluye cada departamento",
-      items=["Lavadora y secadora en el departamento", "Electrodomésticos de acero inoxidable", "Aire acondicionado central", "Piso de loseta", "Vestidor (walk-in closet)", "Regadera walk-in", "Techos altos", "Iluminación LED", "2 cocheras techadas (carports)", "Mantenimiento en el lugar", "Se aceptan mascotas"],
-      util="Servicios", util_p="La electricidad está disponible con Magic Valley Electric Cooperative y el internet con Spectrum.",
-      plans="Planos", p2=("2 recámaras · 2 baños", "Plano del departamento de 2 recámaras"), p3=("3 recámaras · 2 baños · 1,204 pies² · pregunta por disponibilidad", "Plano del departamento de 3 recámaras"),
-      other="También en Leticia St", other_p="Casa de 2 recámaras y 2 baños, de unos 841 pies², con cochera para 2 autos en 1103 Leticia St, Edinburg, TX 78542. Pregunta por disponibilidad.",
-      cta="Agenda una visita", cta_p="Llama a la oficina para ver el departamento o preguntar por fechas de mudanza.", call="Llamar", fb="Síguenos en Facebook")
-  lis = "".join(f"<li>{i}</li>" for i in L["items"])
+  L = d[lng]
+  W = dict(en=dict(per="per month", ask="Call for current price", call="Call", gallery="Photos", tap="Tap a photo to see it larger.", feat="What's included", util="Utilities", map="Get directions"),
+           es=dict(per="al mes", ask="Llama para conocer el precio", call="Llamar", gallery="Fotos", tap="Toca una foto para verla más grande.", feat="Qué incluye", util="Servicios", map="Cómo llegar"))[lng]
+  price = f'<p class="price"><strong>{d["price"]}</strong> {W["per"]}</p>' if d["price"] else f'<p class="price"><strong class="ask">{W["ask"]}</strong></p>'
   facts = "".join(f'<div class="fact"><strong>{n}</strong><span>{w}</span></div>' for n, w in L["facts"])
-  pics = "".join(f'<a href="{r}assets/photos/{k}.jpg" target="_blank" rel="noopener"><img src="{r}assets/photos/{k}-sm.jpg" alt="{e if en else es}" loading="lazy"></a>' for k, e, es in PHOTOS)
-  return f"""  <section class="card listing">
-    <img class="cover" src="{r}assets/photos/kitchen.jpg" alt="{PHOTOS[0][1] if en else PHOTOS[0][2]}" width="1600" height="1200">
+  lis = "".join(f"<li>{i}</li>" for i in L["items"])
+  cover = d["photos"][0]
+  pics = "".join(f'<a href="{r}assets/photos/{d["full"](k)}" target="_blank" rel="noopener"><img src="{r}assets/photos/{d["thumb"](k)}" alt="{e if en else es}" loading="lazy"></a>' for k, e, es in d["photos"][1:])
+  maps = "https://www.google.com/maps/search/?api=1&query=" + d["where"].replace(",", "").replace(" ", "+")
+  return f"""  <section class="card listing" id="{d['id']}">
+    <img class="cover" src="{r}assets/photos/{d['full'](cover[0])}" alt="{cover[1] if en else cover[2]}">
     <div>
       <p class="eyebrow">{L['eyebrow']}</p>
       <h2>{L['h']}</h2>
-      <p class="muted">{L['where']}</p>
-      <p class="price"><strong>{L['price']}</strong> {L['per']}</p>
+      <p class="muted">{d['where']} · <a href="{maps}" target="_blank" rel="noopener">{W['map']}</a></p>
+      {price}
       <div class="facts">{facts}</div>
       <p>{L['p']}</p>
-      <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
+      <a class="btn" href="tel:{TEL}">{W['call']} · {PHONE}</a>
     </div>
   </section>
-  <h2 class="section-title">{L['gallery']}</h2>
-  <p class="muted">{L['tap']}</p>
+  <p class="muted gallery-note">{W['tap']}</p>
   <div class="gallery">{pics}</div>
   <div class="grid">
     <section class="card">
-      <h2>{L['feat']}</h2>
+      <h2>{W['feat']}</h2>
       <ul class="features">{lis}</ul>
     </section>
     <section class="card">
-      <h2>{L['util']}</h2>
-      <p>{L['util_p']}</p>
+      <h2>{W['util']}</h2>
+      <p>{L['util']}</p>
     </section>
-  </div>
+  </div>"""
+
+def apts(lng):
+  r = "" if lng == "en" else "../"
+  L = dict(en=dict(jump=("Veterans Blvd", "Leticia St"), plans="Floor plans", p2=("2 bedrooms · 2 bathrooms", "Floor plan of a 2-bedroom apartment"), p3=("3 bedrooms · 2 bathrooms · 1,204 sq ft · ask about availability", "Floor plan of the 3-bedroom apartment"),
+             cta="Schedule a visit", cta_p="Call the office to see an apartment or ask about move-in dates.", call="Call", fb="Follow us on Facebook"),
+           es=dict(jump=("Veterans Blvd", "Leticia St"), plans="Planos", p2=("2 recámaras · 2 baños", "Plano de un departamento de 2 recámaras"), p3=("3 recámaras · 2 baños · 1,204 pies² · pregunta por disponibilidad", "Plano del departamento de 3 recámaras"),
+             cta="Agenda una visita", cta_p="Llama a la oficina para ver un departamento o preguntar por fechas de mudanza.", call="Llamar", fb="Síguenos en Facebook"))[lng]
+  return f"""  <nav class="jump card"><a href="#veterans">{L['jump'][0]}</a><a href="#leticia">{L['jump'][1]}</a></nav>
+{listing(lng, VETERANS)}
+{listing(lng, LETICIA)}
   <h2 class="section-title">{L['plans']}</h2>
   <div class="grid">
     <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-2-bed.png" alt="{L['p2'][1]}" loading="lazy"></div><p class="muted">{L['p2'][0]}</p></section>
     <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-3-bed.png" alt="{L['p3'][1]}" loading="lazy"></div><p class="muted">{L['p3'][0]}</p></section>
   </div>
-  <div class="grid">
-    <section class="card">
-      <h2>{L['other']}</h2>
-      <p>{L['other_p']}</p>
-    </section>
-    <section class="card">
-      <h2>{L['cta']}</h2>
-      <p>{L['cta_p']}</p>
-      <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
-      <p><a href="{FB}" target="_blank" rel="noopener">{L['fb']}</a></p>
-    </section>
-  </div>"""
+  <section class="card">
+    <h2>{L['cta']}</h2>
+    <p>{L['cta_p']}</p>
+    <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
+    <p><a href="{FB}" target="_blank" rel="noopener">{L['fb']}</a></p>
+  </section>"""
 
 def teaser(lng):
   t = T[lng]; r = t["root"]
-  L = dict(en=("Available now", "2 bedroom, 2 bathroom apartments for $1,100 a month: about 1,000 sq ft, washer and dryer included, central air, walk-in closet and 2 carports.", "See photos and details", "Kitchen with stainless steel appliances"),
-           es=("Disponible ahora", "Departamentos de 2 recámaras y 2 baños por $1,100 al mes: unos 1,000 pies², lavadora y secadora incluidas, aire central, vestidor y 2 cocheras techadas.", "Ver fotos y detalles", "Cocina con electrodomésticos de acero inoxidable"))[lng]
+  L = dict(en=("Available now", "2 bedroom, 2 bathroom apartments in two Edinburg locations: Veterans Blvd ($1,100 a month, washer and dryer included) and Leticia St (water included). Walk-in closets, stainless steel appliances and pets welcome.", "See photos and details", "Kitchen with stainless steel appliances"),
+           es=("Disponible ahora", "Departamentos de 2 recámaras y 2 baños en dos ubicaciones de Edinburg: Veterans Blvd ($1,100 al mes, lavadora y secadora incluidas) y Leticia St (agua incluida). Vestidor, electrodomésticos de acero inoxidable y se aceptan mascotas.", "Ver fotos y detalles", "Cocina con electrodomésticos de acero inoxidable"))[lng]
   return f"""  <section class="card teaser">
     <img src="{r}assets/photos/kitchen.jpg" alt="{L[3]}" width="1600" height="1200">
     <div>
