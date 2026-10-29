@@ -152,8 +152,17 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .office { margin-top: 40px; padding: 16px; border: 1px dashed var(--line); border-radius: 12px; }
 @media print {
   .top, footer, .no-print { display: none !important; }
-  body { background: #fff; color: #000; font-size: 13pt; }
+  body { background: #fff; color: #000; font-size: 11.5pt; line-height: 1.5; }
+  @page { margin: 14mm; }
+  .fields { margin: 10px 0; gap: 12px 24px; }
+  .line span { padding-bottom: 22px; }
+  .fields + .fields, .agree { margin-top: 20px; }
+  .office { margin-top: 20px; }
+  .consent h2 { margin-top: 4px; }
   main.lift { margin-top: 0; padding: 0; }
   .card { box-shadow: none; padding: 0; }
   .line { border-color: #000; }
 }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 4px 0 20px; }
+.actions .btn { margin: 0; }

@@ -467,7 +467,7 @@ def consent(lng):
   r = "" if lng == "en" else "../"
   if lng == "en":
     L = dict(title="SMS Text Message Consent Form", intro="Residents fill in and sign this form at the leasing office. Print it, or ask the office for a copy. Signed forms are kept on file as records of consent.",
-      print="Print this form", name="Resident name*", prop="Property*", unit="Unit*", mobile="Mobile phone number*",
+      print="Print this form", dl=("Download PDF", "View as image"), file="sms-consent-form", name="Resident name*", prop="Property*", unit="Unit*", mobile="Mobile phone number*",
       sections=[("Text message service", "By providing your mobile phone number, you agree to receive text messages from MAC Apartments (ACFLP) about your tenancy: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations and building notices."),
                 ("Message frequency", "Message frequency varies, usually up to 4 messages per month."),
                 ("Standard rates", "Message and data rates may apply depending on your mobile phone plan."),
@@ -477,7 +477,7 @@ def consent(lng):
       sign="Resident signature*", date="Date*", office="Office use only", recv="Received by", entered="Entered in system on")
   else:
     L = dict(title="Formulario de consentimiento para mensajes de texto (SMS)", intro="Los residentes llenan y firman este formulario en la oficina. Imprímelo o pide una copia en la oficina. Los formularios firmados se guardan como comprobante del consentimiento.",
-      print="Imprimir formulario", name="Nombre del residente*", prop="Propiedad*", unit="Departamento*", mobile="Número de celular*",
+      print="Imprimir formulario", dl=("Descargar PDF", "Ver como imagen"), file="formulario-consentimiento-sms", name="Nombre del residente*", prop="Propiedad*", unit="Departamento*", mobile="Número de celular*",
       sections=[("Servicio de mensajes de texto", "Al dar tu número de celular, aceptas recibir mensajes de texto de MAC Apartments (ACFLP) sobre tu renta: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago y avisos del edificio."),
                 ("Frecuencia", "La frecuencia de los mensajes varía, normalmente hasta 4 mensajes al mes."),
                 ("Tarifas", "Pueden aplicarse tarifas de mensajes y datos según tu plan de celular."),
@@ -490,7 +490,7 @@ def consent(lng):
     <div class="consent-head"><img src="{r}assets/icon.png" alt="" width="56" height="56"><div><strong>MAC Apartments</strong><br><span class="muted">{ADDR} · {PHONE}</span></div></div>
     <h2>{L['title']}</h2>
     <p class="muted no-print">{L['intro']}</p>
-    <button class="btn no-print" type="button" onclick="window.print()">{L['print']}</button>
+    <p class="no-print actions"><button class="btn" type="button" onclick="window.print()">{L['print']}</button> <a href="{r}assets/{L['file']}.pdf">{L['dl'][0]}</a> · <a href="{r}assets/{L['file']}.png">{L['dl'][1]}</a></p>
     <div class="fields">
       <div class="line"><span>{L['name']}</span></div>
       <p class="choice">{L['prop']}: &nbsp; ☐ 3807 S Veterans Blvd &nbsp;&nbsp; ☐ 1103 Leticia St</p>
