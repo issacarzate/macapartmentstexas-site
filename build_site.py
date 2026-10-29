@@ -81,46 +81,80 @@ def contact(lng):
 
 FB = "https://www.facebook.com/MacApartmentsTexas/"
 
+PHOTOS = [("kitchen", "Kitchen with stainless steel appliances", "Cocina con electrodomésticos de acero inoxidable"),
+  ("living-kitchen", "Open living area and kitchen", "Sala y cocina abiertas"),
+  ("living-room", "Living room with ceiling fan", "Sala con ventilador de techo"),
+  ("main-bedroom", "Main bedroom with private bathroom and walk-in closet", "Recámara principal con baño propio y vestidor"),
+  ("walk-in-closet", "Walk-in closet", "Vestidor (walk-in closet)"),
+  ("walk-in-shower", "Main bathroom with walk-in shower", "Baño principal con regadera walk-in"),
+  ("washer-dryer", "Washer and dryer in the apartment", "Lavadora y secadora en el departamento"),
+  ("bedroom-2", "Second bedroom", "Segunda recámara"),
+  ("bathroom-2", "Second bathroom with tub", "Segundo baño con tina"),
+  ("kitchen-sink", "Kitchen sink and backsplash", "Fregadero y azulejo de cocina"),
+  ("hallway", "Hallway to the bedrooms", "Pasillo a las recámaras")]
+
 def apts(lng):
   r = "" if lng == "en" else "../"
-  if lng == "en":
-    L = dict(eyebrow="Our community", h="MAC Apartments on Veterans Blvd",
-      p="Apartments with 2 and 3 bedrooms and 2 full bathrooms, close to shops, schools and markets in Edinburg, minutes from McAllen. Peaceful living, pet friendly, and an on-site office that knows you by name.",
-      photo="Kitchen with granite counters and stainless appliances",
-      plans="Floor plans", bed="bedrooms", bath="bathrooms", sqft="sq ft",
-      p2=("Grand Suite", "2 bedrooms · 2 bathrooms · 982 sq ft", "Floor plan of the 2-bedroom apartment"),
-      p3=("Majestic Suite", "3 bedrooms · 2 bathrooms · 1,204 sq ft", "Floor plan of the 3-bedroom apartment"),
-      feat="What every home includes",
-      items=["Appliances included", "Washer and dryer connections", "2 full bathrooms", "Great natural lighting", "LED lighting", "Smart layout", "Pet friendly", "On-site covered parking", "Video surveillance", "8 apartments per building", "Professional on-site team"],
-      other="Also on Leticia St", other_p="2-bedroom, 2-bathroom home of about 841 sq ft with a 2-car garage at 1103 Leticia St, Edinburg, TX 78542.",
-      cta="Ask about availability and current prices", call="Call the office", fb="Follow us on Facebook")
+  en = lng == "en"
+  if en:
+    L = dict(eyebrow="Available now", h="2 bedroom, 2 bathroom apartments",
+      where="3807 S Veterans Blvd, Edinburg, TX 78542",
+      price="$1,100", per="per month",
+      facts=[("2", "bedrooms"), ("2", "bathrooms"), ("≈1,000", "sq ft"), ("2", "carports")],
+      p="Bright apartments with tall ceilings and tile floors throughout, close to shops, schools and markets in Edinburg, minutes from McAllen.",
+      gallery="Photos", tap="Tap a photo to see it larger.",
+      feat="What every apartment includes",
+      items=["Washer and dryer in the apartment", "Stainless steel appliances", "Central air conditioning", "Tile flooring", "Walk-in closet", "Walk-in shower", "Tall ceilings", "LED lighting", "2 carports", "On-site maintenance", "Pet friendly"],
+      util="Utilities", util_p="Electricity is available from Magic Valley Electric Cooperative and internet from Spectrum.",
+      plans="Floor plans", p2=("2 bedrooms · 2 bathrooms", "Floor plan of the 2-bedroom apartment"), p3=("3 bedrooms · 2 bathrooms · 1,204 sq ft · ask about availability", "Floor plan of the 3-bedroom apartment"),
+      other="Also on Leticia St", other_p="2-bedroom, 2-bathroom home of about 841 sq ft with a 2-car garage at 1103 Leticia St, Edinburg, TX 78542. Ask about availability.",
+      cta="Schedule a visit", cta_p="Call the office to see the apartment or ask about move-in dates.", call="Call", fb="Follow us on Facebook")
   else:
-    L = dict(eyebrow="Nuestra comunidad", h="MAC Apartments en Veterans Blvd",
-      p="Departamentos de 2 y 3 recámaras con 2 baños completos, cerca de tiendas, escuelas y supermercados en Edinburg, a minutos de McAllen. Vida tranquila, se aceptan mascotas y una oficina en el lugar que te conoce por tu nombre.",
-      photo="Cocina con cubiertas de granito y electrodomésticos de acero inoxidable",
-      plans="Planos", bed="recámaras", bath="baños", sqft="pies²",
-      p2=("Grand Suite", "2 recámaras · 2 baños · 982 pies²", "Plano del departamento de 2 recámaras"),
-      p3=("Majestic Suite", "3 recámaras · 2 baños · 1,204 pies²", "Plano del departamento de 3 recámaras"),
-      feat="Lo que incluye cada hogar",
-      items=["Electrodomésticos incluidos", "Conexiones para lavadora y secadora", "2 baños completos", "Excelente luz natural", "Iluminación LED", "Distribución inteligente", "Se aceptan mascotas", "Estacionamiento techado", "Videovigilancia", "8 departamentos por edificio", "Equipo profesional en el lugar"],
-      other="También en Leticia St", other_p="Casa de 2 recámaras y 2 baños, de unos 841 pies², con cochera para 2 autos en 1103 Leticia St, Edinburg, TX 78542.",
-      cta="Pregunta por disponibilidad y precios actuales", call="Llama a la oficina", fb="Síguenos en Facebook")
+    L = dict(eyebrow="Disponible ahora", h="Departamentos de 2 recámaras y 2 baños",
+      where="3807 S Veterans Blvd, Edinburg, TX 78542",
+      price="$1,100", per="al mes",
+      facts=[("2", "recámaras"), ("2", "baños"), ("≈1,000", "pies²"), ("2", "cocheras techadas")],
+      p="Departamentos iluminados con techos altos y piso de loseta en todo el departamento, cerca de tiendas, escuelas y supermercados en Edinburg, a minutos de McAllen.",
+      gallery="Fotos", tap="Toca una foto para verla más grande.",
+      feat="Lo que incluye cada departamento",
+      items=["Lavadora y secadora en el departamento", "Electrodomésticos de acero inoxidable", "Aire acondicionado central", "Piso de loseta", "Vestidor (walk-in closet)", "Regadera walk-in", "Techos altos", "Iluminación LED", "2 cocheras techadas (carports)", "Mantenimiento en el lugar", "Se aceptan mascotas"],
+      util="Servicios", util_p="La electricidad está disponible con Magic Valley Electric Cooperative y el internet con Spectrum.",
+      plans="Planos", p2=("2 recámaras · 2 baños", "Plano del departamento de 2 recámaras"), p3=("3 recámaras · 2 baños · 1,204 pies² · pregunta por disponibilidad", "Plano del departamento de 3 recámaras"),
+      other="También en Leticia St", other_p="Casa de 2 recámaras y 2 baños, de unos 841 pies², con cochera para 2 autos en 1103 Leticia St, Edinburg, TX 78542. Pregunta por disponibilidad.",
+      cta="Agenda una visita", cta_p="Llama a la oficina para ver el departamento o preguntar por fechas de mudanza.", call="Llamar", fb="Síguenos en Facebook")
   lis = "".join(f"<li>{i}</li>" for i in L["items"])
-  return f"""  <section class="card">
-    <p class="eyebrow">{L['eyebrow']}</p>
-    <h2>{L['h']}</h2>
-    <p>{L['p']}</p>
-    <figure class="photo"><img src="{r}assets/kitchen.jpg" alt="{L['photo']}" width="1600" height="1200" loading="lazy"></figure>
+  facts = "".join(f'<div class="fact"><strong>{n}</strong><span>{w}</span></div>' for n, w in L["facts"])
+  pics = "".join(f'<a href="{r}assets/photos/{k}.jpg" target="_blank" rel="noopener"><img src="{r}assets/photos/{k}-sm.jpg" alt="{e if en else es}" loading="lazy"></a>' for k, e, es in PHOTOS)
+  return f"""  <section class="card listing">
+    <img class="cover" src="{r}assets/photos/kitchen.jpg" alt="{PHOTOS[0][1] if en else PHOTOS[0][2]}" width="1600" height="1200">
+    <div>
+      <p class="eyebrow">{L['eyebrow']}</p>
+      <h2>{L['h']}</h2>
+      <p class="muted">{L['where']}</p>
+      <p class="price"><strong>{L['price']}</strong> {L['per']}</p>
+      <div class="facts">{facts}</div>
+      <p>{L['p']}</p>
+      <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
+    </div>
   </section>
+  <h2 class="section-title">{L['gallery']}</h2>
+  <p class="muted">{L['tap']}</p>
+  <div class="gallery">{pics}</div>
+  <div class="grid">
+    <section class="card">
+      <h2>{L['feat']}</h2>
+      <ul class="features">{lis}</ul>
+    </section>
+    <section class="card">
+      <h2>{L['util']}</h2>
+      <p>{L['util_p']}</p>
+    </section>
+  </div>
   <h2 class="section-title">{L['plans']}</h2>
   <div class="grid">
-    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-2-bed.png" alt="{L['p2'][2]}" loading="lazy"></div><h3>{L['p2'][0]}</h3><p class="muted">{L['p2'][1]}</p></section>
-    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-3-bed.png" alt="{L['p3'][2]}" loading="lazy"></div><h3>{L['p3'][0]}</h3><p class="muted">{L['p3'][1]}</p></section>
+    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-2-bed.png" alt="{L['p2'][1]}" loading="lazy"></div><p class="muted">{L['p2'][0]}</p></section>
+    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-3-bed.png" alt="{L['p3'][1]}" loading="lazy"></div><p class="muted">{L['p3'][0]}</p></section>
   </div>
-  <section class="card">
-    <h2>{L['feat']}</h2>
-    <ul class="features">{lis}</ul>
-  </section>
   <div class="grid">
     <section class="card">
       <h2>{L['other']}</h2>
@@ -128,6 +162,7 @@ def apts(lng):
     </section>
     <section class="card">
       <h2>{L['cta']}</h2>
+      <p>{L['cta_p']}</p>
       <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
       <p><a href="{FB}" target="_blank" rel="noopener">{L['fb']}</a></p>
     </section>
@@ -135,10 +170,10 @@ def apts(lng):
 
 def teaser(lng):
   t = T[lng]; r = t["root"]
-  L = dict(en=("Our apartments", "2 and 3 bedroom apartments with 2 full bathrooms, appliances included, covered parking and pet friendly.", "See apartments and floor plans", "Kitchen with granite counters and stainless appliances"),
-           es=("Nuestros departamentos", "Departamentos de 2 y 3 recámaras con 2 baños completos, electrodomésticos incluidos, estacionamiento techado y se aceptan mascotas.", "Ver departamentos y planos", "Cocina con cubiertas de granito y electrodomésticos de acero inoxidable"))[lng]
+  L = dict(en=("Available now", "2 bedroom, 2 bathroom apartments for $1,100 a month: about 1,000 sq ft, washer and dryer included, central air, walk-in closet and 2 carports.", "See photos and details", "Kitchen with stainless steel appliances"),
+           es=("Disponible ahora", "Departamentos de 2 recámaras y 2 baños por $1,100 al mes: unos 1,000 pies², lavadora y secadora incluidas, aire central, vestidor y 2 cocheras techadas.", "Ver fotos y detalles", "Cocina con electrodomésticos de acero inoxidable"))[lng]
   return f"""  <section class="card teaser">
-    <img src="{r}assets/kitchen.jpg" alt="{L[3]}" width="1600" height="1200">
+    <img src="{r}assets/photos/kitchen.jpg" alt="{L[3]}" width="1600" height="1200">
     <div>
       <p class="eyebrow">{L[0]}</p>
       <p>{L[1]}</p>
@@ -362,11 +397,11 @@ terms_es = f"""  <article class="card legal">
 
 files = {
   "index.html": page("en", "index.html", "MAC Apartments · Edinburg, Texas", "Apartment homes in Edinburg, Texas. Office, phone and resident information.", "Your home in Edinburg, Texas", "Apartment homes and houses with a local office that knows you by name.", home_en, small=False),
-  "apartments.html": page("en", "apartments.html", "Apartments · MAC Apartments", "2 and 3 bedroom apartments in Edinburg, Texas: floor plans, features and contact.", "Our apartments", "2 and 3 bedroom homes in Edinburg, Texas, near McAllen.", apts("en")),
+  "apartments.html": page("en", "apartments.html", "Apartments · MAC Apartments", "2 bedroom, 2 bathroom apartments for rent in Edinburg, Texas: $1,100 a month, washer and dryer included. Photos, features and contact.", "Our apartments", "Apartments for rent in Edinburg, Texas, near McAllen.", apts("en")),
   "privacy.html": page("en", "privacy.html", "Privacy policy · MAC Apartments", "How MAC Apartments collects, uses and protects resident information, including text messages.", "Privacy policy", "How we collect, use and protect your information.", privacy_en),
   "sms-terms.html": page("en", "sms-terms.html", "SMS terms · MAC Apartments", "Terms for MAC Apartments resident text messages: what we send, frequency, cost, STOP and HELP.", "SMS terms", "Text message updates for MAC Apartments residents.", terms_en),
   "es/index.html": page("es", "index.html", "MAC Apartments · Edinburg, Texas", "Departamentos en Edinburg, Texas. Oficina, teléfono e información para residentes.", "Tu hogar en Edinburg, Texas", "Departamentos y casas con una oficina local que te conoce por tu nombre.", home_es, small=False),
-  "es/departamentos.html": page("es", "departamentos.html", "Departamentos · MAC Apartments", "Departamentos de 2 y 3 recámaras en Edinburg, Texas: planos, características y contacto.", "Nuestros departamentos", "Hogares de 2 y 3 recámaras en Edinburg, Texas, cerca de McAllen.", apts("es")),
+  "es/departamentos.html": page("es", "departamentos.html", "Departamentos · MAC Apartments", "Departamentos de 2 recámaras y 2 baños en renta en Edinburg, Texas: $1,100 al mes, lavadora y secadora incluidas. Fotos, características y contacto.", "Nuestros departamentos", "Departamentos en renta en Edinburg, Texas, cerca de McAllen.", apts("es")),
   "es/privacidad.html": page("es", "privacidad.html", "Política de privacidad · MAC Apartments", "Cómo MAC Apartments recopila, usa y protege la información de residentes, incluidos los mensajes de texto.", "Política de privacidad", "Cómo recopilamos, usamos y protegemos tu información.", privacy_es),
   "es/terminos-sms.html": page("es", "terminos-sms.html", "Términos SMS · MAC Apartments", "Términos de los mensajes de texto de MAC Apartments: qué enviamos, frecuencia, costo, STOP y HELP.", "Términos SMS", "Avisos por mensaje de texto para residentes de MAC Apartments.", terms_es),
 }

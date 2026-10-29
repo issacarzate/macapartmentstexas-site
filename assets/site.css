@@ -110,3 +110,20 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .features { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 10px 20px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 .features li { padding-left: 28px; position: relative; }
 .features li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--blue); font-weight: 800; }
+
+/* Listing */
+.listing { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 760px) { .listing { grid-template-columns: 1.2fr 1fr; } }
+.listing .cover { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
+.listing h2 { margin-bottom: 2px; }
+.price { font-size: 18px; margin: 10px 0 14px; color: var(--muted); }
+.price strong { font-size: 34px; color: var(--text); letter-spacing: -0.02em; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 16px; }
+.fact { background: color-mix(in srgb, var(--blue) 8%, transparent); border-radius: 12px; padding: 10px 6px; text-align: center; }
+.fact strong { display: block; font-size: 20px; }
+.fact span { font-size: 13px; color: var(--muted); }
+.gallery { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); margin: 12px 0 24px; }
+.gallery a { display: block; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+.gallery img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 0.25s ease; }
+.gallery a:hover img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
