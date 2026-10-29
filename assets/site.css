@@ -145,7 +145,8 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .line span { display: block; font-size: 13px; color: var(--muted); padding-bottom: 30px; }
 .choice { flex: 1 1 100%; margin: 0; font-size: 15px; }
 .fields + .fields, .agree { margin-top: 36px; }
-.agree { display: flex; gap: 10px; font-weight: 600; }
+.terms p { margin: 10px 0; }
+.agree { display: flex; gap: 10px; font-weight: 600; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; }
 .agree .box { font-size: 24px; line-height: 1; }
 .small { font-size: 14px; }
 .office { margin-top: 40px; padding: 16px; border: 1px dashed var(--line); border-radius: 12px; }

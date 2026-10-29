@@ -326,7 +326,7 @@ terms_en = f"""  <article class="card legal">
     <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service. See the <a href="sms-consent.html">SMS consent form</a> residents sign.</p>
 
     <h2>Message frequency</h2>
-    <p>Message frequency varies, usually a few messages per month.</p>
+    <p>Message frequency varies, usually up to 4 messages per month.</p>
 
     <h2>Cost</h2>
     <p>Message and data rates may apply, according to your mobile plan. MAC Apartments does not charge for text messages.</p>
@@ -433,7 +433,7 @@ terms_es = f"""  <article class="card legal">
     <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio. Consulta el <a href="consentimiento-sms.html">formulario de consentimiento SMS</a> que firman los residentes.</p>
 
     <h2>Frecuencia</h2>
-    <p>La frecuencia de los mensajes varía, normalmente unos cuantos al mes.</p>
+    <p>La frecuencia de los mensajes varía, normalmente hasta 4 mensajes al mes.</p>
 
     <h2>Costo</h2>
     <p>Pueden aplicarse tarifas de mensajes y datos según tu plan. MAC Apartments no cobra por los mensajes de texto.</p>
@@ -454,17 +454,26 @@ terms_es = f"""  <article class="card legal">
 def consent(lng):
   r = "" if lng == "en" else "../"
   if lng == "en":
-    L = dict(title="Text message (SMS) consent form", intro="Residents fill in and sign this form at the leasing office, or the same wording on their lease. Print it, or ask the office for a copy.",
-      print="Print this form", name="Resident name", prop="Property", unit="Unit", mobile="Mobile phone number",
-      agree="Yes, I agree to receive text messages from MAC Apartments (ACFLP) at the mobile number above about my tenancy: maintenance and work-order updates, scheduled service interruptions, payment confirmations and building notices. Message frequency varies. Message and data rates may apply. Reply STOP at any time to opt out, or HELP for help. Agreeing is not a condition of renting.",
-      links="SMS terms: macapartmentstexas.com/sms-terms.html · Privacy policy: macapartmentstexas.com/privacy.html",
-      sign="Signature", date="Date", office="Office use only", recv="Received by", entered="Entered in system on")
+    L = dict(title="SMS Text Message Consent Form", intro="Residents fill in and sign this form at the leasing office. Print it, or ask the office for a copy. Signed forms are kept on file as records of consent.",
+      print="Print this form", name="Resident name*", prop="Property*", unit="Unit*", mobile="Mobile phone number*",
+      sections=[("Text message service", "By providing your mobile phone number, you agree to receive text messages from MAC Apartments (ACFLP) about your tenancy: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations and building notices."),
+                ("Message frequency", "Message frequency varies, usually up to 4 messages per month."),
+                ("Standard rates", "Message and data rates may apply depending on your mobile phone plan."),
+                ("Help &amp; Stop", "Reply HELP for help or STOP to cancel at any time. You can also call the office at " + PHONE + "."),
+                ("Terms &amp; Privacy", "Visit macapartmentstexas.com/sms-terms.html for the SMS Terms and macapartmentstexas.com/privacy.html for the Privacy Policy.")],
+      agree="I consent to receive text messages from MAC Apartments as described above. I understand that consent is not required to rent an apartment or to receive any service.",
+      sign="Resident signature*", date="Date*", office="Office use only", recv="Received by", entered="Entered in system on")
   else:
-    L = dict(title="Formulario de consentimiento para mensajes de texto (SMS)", intro="Los residentes llenan y firman este formulario en la oficina, o la misma declaración en su contrato. Imprímelo o pide una copia en la oficina.",
-      print="Imprimir formulario", name="Nombre del residente", prop="Propiedad", unit="Departamento", mobile="Número de celular",
-      agree="Sí, acepto recibir mensajes de texto de MAC Apartments (ACFLP) en el número de celular anterior sobre mi renta: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios, confirmaciones de pago y avisos del edificio. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde STOP en cualquier momento para no recibir más, o HELP para ayuda. Aceptar no es condición para rentar.",
-      links="Términos SMS: macapartmentstexas.com/es/terminos-sms.html · Privacidad: macapartmentstexas.com/es/privacidad.html",
-      sign="Firma", date="Fecha", office="Solo para la oficina", recv="Recibido por", entered="Registrado en el sistema el")
+    L = dict(title="Formulario de consentimiento para mensajes de texto (SMS)", intro="Los residentes llenan y firman este formulario en la oficina. Imprímelo o pide una copia en la oficina. Los formularios firmados se guardan como comprobante del consentimiento.",
+      print="Imprimir formulario", name="Nombre del residente*", prop="Propiedad*", unit="Departamento*", mobile="Número de celular*",
+      sections=[("Servicio de mensajes de texto", "Al dar tu número de celular, aceptas recibir mensajes de texto de MAC Apartments (ACFLP) sobre tu renta: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago y avisos del edificio."),
+                ("Frecuencia", "La frecuencia de los mensajes varía, normalmente hasta 4 mensajes al mes."),
+                ("Tarifas", "Pueden aplicarse tarifas de mensajes y datos según tu plan de celular."),
+                ("Ayuda y baja", "Responde HELP para ayuda o STOP para cancelar en cualquier momento. También puedes llamar a la oficina al " + PHONE + "."),
+                ("Términos y privacidad", "Consulta macapartmentstexas.com/es/terminos-sms.html para los Términos SMS y macapartmentstexas.com/es/privacidad.html para la Política de privacidad.")],
+      agree="Doy mi consentimiento para recibir mensajes de texto de MAC Apartments como se describe arriba. Entiendo que el consentimiento no es requisito para rentar un departamento ni para recibir ningún servicio.",
+      sign="Firma del residente*", date="Fecha*", office="Solo para la oficina", recv="Recibido por", entered="Registrado en el sistema el")
+  secs = "".join(f"<p><strong>{h}:</strong> {t}</p>" for h, t in L["sections"])
   return f"""  <article class="card consent">
     <div class="consent-head"><img src="{r}assets/icon.png" alt="" width="56" height="56"><div><strong>MAC Apartments</strong><br><span class="muted">{ADDR} · {PHONE}</span></div></div>
     <h2>{L['title']}</h2>
@@ -474,10 +483,10 @@ def consent(lng):
       <div class="line"><span>{L['name']}</span></div>
       <p class="choice">{L['prop']}: &nbsp; ☐ 3807 S Veterans Blvd &nbsp;&nbsp; ☐ 1103 Leticia St</p>
       <div class="line half"><span>{L['unit']}</span></div>
-      <div class="line"><span>{L['mobile']}</span></div>
+      <div class="line half"><span>{L['mobile']}</span></div>
     </div>
+    <div class="terms">{secs}</div>
     <p class="agree"><span class="box">☐</span> {L['agree']}</p>
-    <p class="muted small">{L['links']}</p>
     <div class="fields">
       <div class="line half"><span>{L['sign']}</span></div>
       <div class="line half"><span>{L['date']}</span></div>
