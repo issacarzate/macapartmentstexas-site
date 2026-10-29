@@ -1,0 +1,377 @@
+"""Writes the static macapartmentstexas.com site (EN + ES) into the folder given as argv[1]."""
+import sys, pathlib
+
+OUT = pathlib.Path(sys.argv[1])
+ADDR = "3807 S Veterans Blvd, Building H, Edinburg, TX 78542"
+MAP = "https://www.google.com/maps/search/?api=1&query=3807+S+Veterans+Blvd+Edinburg+TX+78542"
+PHONE = "(956) 238-9914"
+TEL = "+19562389914"
+EMAIL = "contact@macapartmentstexas.com"
+UPDATED_EN = "October 28, 2026"
+UPDATED_ES = "28 de octubre de 2026"
+
+T = {
+  "en": dict(lang="en", root="", home="index.html", apts="apartments.html", privacy="privacy.html", terms="sms-terms.html",
+             nav=("Home", "Privacy", "SMS terms", "Apartments"), other="Español", other_href={"index.html": "es/index.html", "apartments.html": "es/departamentos.html", "privacy.html": "es/privacidad.html", "sms-terms.html": "es/terminos-sms.html"},
+             foot="MAC Apartments is operated by ACFLP."),
+  "es": dict(lang="es", root="../", home="index.html", apts="departamentos.html", privacy="privacidad.html", terms="terminos-sms.html",
+             nav=("Inicio", "Privacidad", "Términos SMS", "Departamentos"), other="English", other_href={"index.html": "../index.html", "departamentos.html": "../apartments.html", "privacidad.html": "../privacy.html", "terminos-sms.html": "../sms-terms.html"},
+             foot="MAC Apartments es operado por ACFLP."),
+}
+
+def page(lng, file, title, desc, hero_h1, hero_p, body, small=True):
+  t = T[lng]
+  cur = lambda f: ' aria-current="page"' if f == file else ''
+  r = t["root"]
+  return f"""<!doctype html>
+<html lang="{t['lang']}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="icon" href="{r}assets/icon.png">
+<link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{r}assets/site.css">
+<link rel="alternate" hreflang="{'es' if lng == 'en' else 'en'}" href="{t['other_href'][file]}">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="{t['home']}"><img src="{r}assets/icon.png" alt="" width="40" height="40">MAC Apartments</a>
+      <div class="links">
+        <a href="{t['home']}"{cur(t['home'])}>{t['nav'][0]}</a>
+        <a href="{t['apts']}"{cur(t['apts'])}>{t['nav'][3]}</a>
+        <a href="{t['privacy']}"{cur(t['privacy'])}>{t['nav'][1]}</a>
+        <a href="{t['terms']}"{cur(t['terms'])}>{t['nav'][2]}</a>
+        <a class="lang" href="{t['other_href'][file]}" hreflang="{'es' if lng == 'en' else 'en'}">{t['other']}</a>
+      </div>
+    </nav>
+    <div class="hero{' small' if small else ''}">
+      <h1>{hero_h1}</h1>
+      <p>{hero_p}</p>
+    </div>
+  </div>
+</header>
+<main class="wrap lift">
+{body}
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 MAC Apartments · {ADDR} · <a href="tel:{TEL}">{PHONE}</a><br>{t['foot']}</span>
+    <nav><a href="{t['privacy']}">{t['nav'][1]}</a><a href="{t['terms']}">{t['nav'][2]}</a></nav>
+  </div>
+</footer>
+</body>
+</html>
+"""
+
+def contact(lng):
+  L = dict(en=("Office", "Phone", "Email", "Get directions"), es=("Oficina", "Teléfono", "Correo", "Cómo llegar"))[lng]
+  return f"""<ul class="contact">
+      <li><strong>{L[0]}</strong>{ADDR}</li>
+      <li><strong>{L[1]}</strong><a href="tel:{TEL}">{PHONE}</a></li>
+      <li><strong>{L[2]}</strong><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+    </ul>
+    <a class="btn" href="{MAP}" target="_blank" rel="noopener">{L[3]}</a>"""
+
+FB = "https://www.facebook.com/MacApartmentsTexas/"
+
+def apts(lng):
+  r = "" if lng == "en" else "../"
+  if lng == "en":
+    L = dict(eyebrow="Our community", h="MAC Apartments on Veterans Blvd",
+      p="Apartments with 2 and 3 bedrooms and 2 full bathrooms, close to shops, schools and markets in Edinburg, minutes from McAllen. Peaceful living, pet friendly, and an on-site office that knows you by name.",
+      photo="Kitchen with granite counters and stainless appliances",
+      plans="Floor plans", bed="bedrooms", bath="bathrooms", sqft="sq ft",
+      p2=("Grand Suite", "2 bedrooms · 2 bathrooms · 982 sq ft", "Floor plan of the 2-bedroom apartment"),
+      p3=("Majestic Suite", "3 bedrooms · 2 bathrooms · 1,204 sq ft", "Floor plan of the 3-bedroom apartment"),
+      feat="What every home includes",
+      items=["Appliances included", "Washer and dryer connections", "2 full bathrooms", "Great natural lighting", "LED lighting", "Smart layout", "Pet friendly", "On-site covered parking", "Video surveillance", "8 apartments per building", "Professional on-site team"],
+      other="Also on Leticia St", other_p="2-bedroom, 2-bathroom home of about 841 sq ft with a 2-car garage at 1103 Leticia St, Edinburg, TX 78542.",
+      cta="Ask about availability and current prices", call="Call the office", fb="Follow us on Facebook")
+  else:
+    L = dict(eyebrow="Nuestra comunidad", h="MAC Apartments en Veterans Blvd",
+      p="Departamentos de 2 y 3 recámaras con 2 baños completos, cerca de tiendas, escuelas y supermercados en Edinburg, a minutos de McAllen. Vida tranquila, se aceptan mascotas y una oficina en el lugar que te conoce por tu nombre.",
+      photo="Cocina con cubiertas de granito y electrodomésticos de acero inoxidable",
+      plans="Planos", bed="recámaras", bath="baños", sqft="pies²",
+      p2=("Grand Suite", "2 recámaras · 2 baños · 982 pies²", "Plano del departamento de 2 recámaras"),
+      p3=("Majestic Suite", "3 recámaras · 2 baños · 1,204 pies²", "Plano del departamento de 3 recámaras"),
+      feat="Lo que incluye cada hogar",
+      items=["Electrodomésticos incluidos", "Conexiones para lavadora y secadora", "2 baños completos", "Excelente luz natural", "Iluminación LED", "Distribución inteligente", "Se aceptan mascotas", "Estacionamiento techado", "Videovigilancia", "8 departamentos por edificio", "Equipo profesional en el lugar"],
+      other="También en Leticia St", other_p="Casa de 2 recámaras y 2 baños, de unos 841 pies², con cochera para 2 autos en 1103 Leticia St, Edinburg, TX 78542.",
+      cta="Pregunta por disponibilidad y precios actuales", call="Llama a la oficina", fb="Síguenos en Facebook")
+  lis = "".join(f"<li>{i}</li>" for i in L["items"])
+  return f"""  <section class="card">
+    <p class="eyebrow">{L['eyebrow']}</p>
+    <h2>{L['h']}</h2>
+    <p>{L['p']}</p>
+    <figure class="photo"><img src="{r}assets/kitchen.jpg" alt="{L['photo']}" width="1600" height="1200" loading="lazy"></figure>
+  </section>
+  <h2 class="section-title">{L['plans']}</h2>
+  <div class="grid">
+    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-2-bed.png" alt="{L['p2'][2]}" loading="lazy"></div><h3>{L['p2'][0]}</h3><p class="muted">{L['p2'][1]}</p></section>
+    <section class="card plan"><div class="plan-img"><img src="{r}assets/plan-3-bed.png" alt="{L['p3'][2]}" loading="lazy"></div><h3>{L['p3'][0]}</h3><p class="muted">{L['p3'][1]}</p></section>
+  </div>
+  <section class="card">
+    <h2>{L['feat']}</h2>
+    <ul class="features">{lis}</ul>
+  </section>
+  <div class="grid">
+    <section class="card">
+      <h2>{L['other']}</h2>
+      <p>{L['other_p']}</p>
+    </section>
+    <section class="card">
+      <h2>{L['cta']}</h2>
+      <a class="btn" href="tel:{TEL}">{L['call']} · {PHONE}</a>
+      <p><a href="{FB}" target="_blank" rel="noopener">{L['fb']}</a></p>
+    </section>
+  </div>"""
+
+def teaser(lng):
+  t = T[lng]; r = t["root"]
+  L = dict(en=("Our apartments", "2 and 3 bedroom apartments with 2 full bathrooms, appliances included, covered parking and pet friendly.", "See apartments and floor plans", "Kitchen with granite counters and stainless appliances"),
+           es=("Nuestros departamentos", "Departamentos de 2 y 3 recámaras con 2 baños completos, electrodomésticos incluidos, estacionamiento techado y se aceptan mascotas.", "Ver departamentos y planos", "Cocina con cubiertas de granito y electrodomésticos de acero inoxidable"))[lng]
+  return f"""  <section class="card teaser">
+    <img src="{r}assets/kitchen.jpg" alt="{L[3]}" width="1600" height="1200">
+    <div>
+      <p class="eyebrow">{L[0]}</p>
+      <p>{L[1]}</p>
+      <a class="btn" href="{t['apts']}">{L[2]}</a>
+    </div>
+  </section>"""
+
+# ---------- English ----------
+home_en = f"""  <div class="grid">
+    <section class="card">
+      <p class="eyebrow">Welcome</p>
+      <h2>Apartment homes in Edinburg, Texas</h2>
+      <p>MAC Apartments is a local property management company in Edinburg, Texas. We rent and care for apartment homes and houses, and our team has more than 10 years of experience looking after residents with fast maintenance and a friendly on-site office.</p>
+    </section>
+    <section class="card">
+      <p class="eyebrow">Contact us</p>
+      {contact('en')}
+    </section>
+  </div>
+{teaser('en')}
+  <section class="card">
+    <p class="eyebrow">For residents</p>
+    <h2>Text message updates</h2>
+    <p>Residents who agree on their lease or with the office can receive text messages from MAC Apartments about their home: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations and building notices.</p>
+    <p>Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out or <strong>HELP</strong> for help. Agreeing to texts is never a condition of renting. See our <a href="sms-terms.html">SMS terms</a> and <a href="privacy.html">privacy policy</a>.</p>
+  </section>"""
+
+privacy_en = f"""  <article class="card legal">
+    <p class="muted">Last updated: {UPDATED_EN}</p>
+    <p>This policy explains how MAC Apartments, operated by ACFLP (“we”, “us”), collects, uses and protects information about residents, applicants and visitors to this website.</p>
+
+    <h2>Information we collect</h2>
+    <ul>
+      <li><strong>Contact details:</strong> name, mobile phone number, email and mailing address.</li>
+      <li><strong>Rental information:</strong> lease details, household members, vehicles, pets, maintenance requests and photos you send us.</li>
+      <li><strong>Payment records:</strong> charges, payments and receipts on your account.</li>
+      <li><strong>Application information</strong> you choose to give us, such as identification needed to process a rental application.</li>
+    </ul>
+    <p>This website itself does not use forms, tracking cookies or advertising trackers.</p>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li>To manage your lease, account, payments and maintenance requests.</li>
+      <li>To contact you about your home, including by phone, email and text message (see below).</li>
+      <li>To meet legal, accounting and safety obligations.</li>
+    </ul>
+
+    <h2>Text messages (SMS)</h2>
+    <p>If you agree to receive text messages, we use your mobile number only to send you messages about your tenancy, as described in our <a href="sms-terms.html">SMS terms</a>.</p>
+    <div class="note">
+      <p><strong>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Text messaging opt-in data and consent are not shared with any third party, except with the messaging service providers that deliver our messages.</p>
+    </div>
+    <p>You can stop text messages at any time by replying <strong>STOP</strong>.</p>
+
+    <h2>How we share information</h2>
+    <p>We do not sell or rent personal information. We share it only:</p>
+    <ul>
+      <li>With service providers who help us run our business (for example, text-message delivery, email and secure data hosting), only for that purpose and under confidentiality obligations.</li>
+      <li>When required by law, court order or to protect the safety of residents, staff or property.</li>
+      <li>With a collection agency or attorney if an account is past due after a lease ends, as permitted by law.</li>
+    </ul>
+
+    <h2>How we protect information</h2>
+    <p>Access to resident records is limited to staff who need it. Sensitive identification numbers are stored encrypted, and our systems use secure (HTTPS) connections.</p>
+
+    <h2>How long we keep information</h2>
+    <p>We keep records for as long as needed to manage your lease and as required for accounting, tax and legal purposes.</p>
+
+    <h2>Your choices</h2>
+    <p>You may ask to see or correct the information we hold about you, or to stop receiving text messages, by contacting the office.</p>
+
+    <h2>Children</h2>
+    <p>This website and our text messages are not directed to children under 13.</p>
+
+    <h2>Changes</h2>
+    <p>We may update this policy. The date at the top shows the latest version.</p>
+
+    <h2>Contact</h2>
+    {contact('en')}
+  </article>"""
+
+terms_en = f"""  <article class="card legal">
+    <p class="muted">Last updated: {UPDATED_EN}</p>
+
+    <h2>Program</h2>
+    <p><strong>MAC Apartments resident notices</strong>, sent by MAC Apartments (operated by ACFLP) to current residents.</p>
+
+    <h2>What we send</h2>
+    <p>Informational messages about your home: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations, office hours and building notices. We do not send marketing messages.</p>
+
+    <h2>How you sign up</h2>
+    <p>You give your mobile number on your lease or rental application, or to the office, and agree to this statement:</p>
+    <div class="note"><p>“I agree to receive text messages from MAC Apartments about my tenancy, maintenance and building notices. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help.”</p></div>
+    <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service.</p>
+
+    <h2>Message frequency</h2>
+    <p>Message frequency varies, usually a few messages per month.</p>
+
+    <h2>Cost</h2>
+    <p>Message and data rates may apply, according to your mobile plan. MAC Apartments does not charge for text messages.</p>
+
+    <h2>Stop messages</h2>
+    <p>Reply <strong>STOP</strong> (or ALTO) to any message to stop receiving texts. We will send one message confirming you have been unsubscribed, and you will receive no further texts unless you reply <strong>START</strong> to sign up again.</p>
+
+    <h2>Help</h2>
+    <p>Reply <strong>HELP</strong> (or AYUDA) for help, call <a href="tel:{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+
+    <h2>Carriers</h2>
+    <p>Mobile carriers are not liable for delayed or undelivered messages.</p>
+
+    <h2>Privacy</h2>
+    <p>See our <a href="privacy.html">privacy policy</a>. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</p>
+  </article>"""
+
+# ---------- Español ----------
+home_es = f"""  <div class="grid">
+    <section class="card">
+      <p class="eyebrow">Bienvenidos</p>
+      <h2>Departamentos en Edinburg, Texas</h2>
+      <p>MAC Apartments es una empresa local de administración de propiedades en Edinburg, Texas. Rentamos y cuidamos departamentos y casas, y nuestro equipo tiene más de 10 años de experiencia atendiendo a residentes con mantenimiento rápido y una oficina amable en el lugar.</p>
+    </section>
+    <section class="card">
+      <p class="eyebrow">Contáctanos</p>
+      {contact('es')}
+    </section>
+  </div>
+{teaser('es')}
+  <section class="card">
+    <p class="eyebrow">Para residentes</p>
+    <h2>Avisos por mensaje de texto</h2>
+    <p>Los residentes que lo aceptan en su contrato o en la oficina pueden recibir mensajes de texto de MAC Apartments sobre su hogar: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago y avisos del edificio.</p>
+    <p>La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde <strong>STOP</strong> para no recibir más o <strong>HELP</strong> para ayuda. Aceptar mensajes nunca es condición para rentar. Consulta nuestros <a href="terminos-sms.html">términos SMS</a> y nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+  </section>"""
+
+privacy_es = f"""  <article class="card legal">
+    <p class="muted">Última actualización: {UPDATED_ES}</p>
+    <p>Esta política explica cómo MAC Apartments, operado por ACFLP (“nosotros”), recopila, usa y protege la información de residentes, solicitantes y visitantes de este sitio web.</p>
+
+    <h2>Información que recopilamos</h2>
+    <ul>
+      <li><strong>Datos de contacto:</strong> nombre, número de celular, correo y dirección postal.</li>
+      <li><strong>Información de la renta:</strong> datos del contrato, miembros del hogar, vehículos, mascotas, solicitudes de mantenimiento y fotos que nos envías.</li>
+      <li><strong>Registros de pago:</strong> cargos, pagos y recibos de tu cuenta.</li>
+      <li><strong>Información de solicitud</strong> que decidas darnos, como la identificación necesaria para procesar una solicitud de renta.</li>
+    </ul>
+    <p>Este sitio web no usa formularios, cookies de rastreo ni rastreadores publicitarios.</p>
+
+    <h2>Cómo usamos la información</h2>
+    <ul>
+      <li>Para administrar tu contrato, cuenta, pagos y solicitudes de mantenimiento.</li>
+      <li>Para comunicarnos contigo sobre tu hogar, por teléfono, correo y mensaje de texto (ver abajo).</li>
+      <li>Para cumplir obligaciones legales, contables y de seguridad.</li>
+    </ul>
+
+    <h2>Mensajes de texto (SMS)</h2>
+    <p>Si aceptas recibir mensajes de texto, usamos tu número de celular solo para enviarte mensajes sobre tu renta, como se describe en nuestros <a href="terminos-sms.html">términos SMS</a>.</p>
+    <div class="note">
+      <p><strong>No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción.</strong> Los datos y el consentimiento de suscripción a mensajes de texto no se comparten con ningún tercero, excepto con los proveedores que entregan nuestros mensajes.</p>
+    </div>
+    <p>Puedes dejar de recibir mensajes en cualquier momento respondiendo <strong>STOP</strong>.</p>
+
+    <h2>Con quién compartimos información</h2>
+    <p>No vendemos ni rentamos información personal. Solo la compartimos:</p>
+    <ul>
+      <li>Con proveedores que nos ayudan a operar (por ejemplo, envío de mensajes de texto, correo y almacenamiento seguro de datos), solo para ese fin y con obligación de confidencialidad.</li>
+      <li>Cuando lo exija la ley, una orden judicial o para proteger la seguridad de residentes, personal o la propiedad.</li>
+      <li>Con una agencia de cobranza o un abogado si una cuenta queda con saldo vencido después de terminar el contrato, según lo permita la ley.</li>
+    </ul>
+
+    <h2>Cómo protegemos la información</h2>
+    <p>Solo el personal que lo necesita puede ver los registros de residentes. Los números de identificación sensibles se guardan cifrados y nuestros sistemas usan conexiones seguras (HTTPS).</p>
+
+    <h2>Cuánto tiempo la guardamos</h2>
+    <p>Guardamos los registros mientras sea necesario para administrar tu contrato y según lo exijan fines contables, fiscales y legales.</p>
+
+    <h2>Tus opciones</h2>
+    <p>Puedes pedir ver o corregir la información que tenemos sobre ti, o dejar de recibir mensajes de texto, comunicándote con la oficina.</p>
+
+    <h2>Menores</h2>
+    <p>Este sitio web y nuestros mensajes no están dirigidos a menores de 13 años.</p>
+
+    <h2>Cambios</h2>
+    <p>Podemos actualizar esta política. La fecha de arriba indica la versión más reciente.</p>
+
+    <h2>Contacto</h2>
+    {contact('es')}
+  </article>"""
+
+terms_es = f"""  <article class="card legal">
+    <p class="muted">Última actualización: {UPDATED_ES}</p>
+
+    <h2>Programa</h2>
+    <p><strong>Avisos a residentes de MAC Apartments</strong>, enviados por MAC Apartments (operado por ACFLP) a sus residentes actuales.</p>
+
+    <h2>Qué enviamos</h2>
+    <p>Mensajes informativos sobre tu hogar: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago, horario de oficina y avisos del edificio. No enviamos mensajes de mercadotecnia.</p>
+
+    <h2>Cómo te suscribes</h2>
+    <p>Das tu número de celular en tu contrato o solicitud de renta, o en la oficina, y aceptas esta declaración:</p>
+    <div class="note"><p>“Acepto recibir mensajes de texto de MAC Apartments sobre mi renta, mantenimiento y avisos del edificio. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde STOP para no recibir más, HELP para ayuda.”</p></div>
+    <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio.</p>
+
+    <h2>Frecuencia</h2>
+    <p>La frecuencia de los mensajes varía, normalmente unos cuantos al mes.</p>
+
+    <h2>Costo</h2>
+    <p>Pueden aplicarse tarifas de mensajes y datos según tu plan. MAC Apartments no cobra por los mensajes de texto.</p>
+
+    <h2>Dejar de recibir mensajes</h2>
+    <p>Responde <strong>STOP</strong> (o ALTO) a cualquier mensaje para dejar de recibirlos. Te enviaremos un mensaje confirmando la baja y no recibirás más, a menos que respondas <strong>START</strong> para suscribirte otra vez.</p>
+
+    <h2>Ayuda</h2>
+    <p>Responde <strong>HELP</strong> (o AYUDA), llama al <a href="tel:{TEL}">{PHONE}</a> o escribe a <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+
+    <h2>Compañías telefónicas</h2>
+    <p>Las compañías telefónicas no son responsables por mensajes retrasados o no entregados.</p>
+
+    <h2>Privacidad</h2>
+    <p>Consulta nuestra <a href="privacidad.html">política de privacidad</a>. No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción.</p>
+  </article>"""
+
+files = {
+  "index.html": page("en", "index.html", "MAC Apartments · Edinburg, Texas", "Apartment homes in Edinburg, Texas. Office, phone and resident information.", "Your home in Edinburg, Texas", "Apartment homes and houses with a local office that knows you by name.", home_en, small=False),
+  "apartments.html": page("en", "apartments.html", "Apartments · MAC Apartments", "2 and 3 bedroom apartments in Edinburg, Texas: floor plans, features and contact.", "Our apartments", "2 and 3 bedroom homes in Edinburg, Texas, near McAllen.", apts("en")),
+  "privacy.html": page("en", "privacy.html", "Privacy policy · MAC Apartments", "How MAC Apartments collects, uses and protects resident information, including text messages.", "Privacy policy", "How we collect, use and protect your information.", privacy_en),
+  "sms-terms.html": page("en", "sms-terms.html", "SMS terms · MAC Apartments", "Terms for MAC Apartments resident text messages: what we send, frequency, cost, STOP and HELP.", "SMS terms", "Text message updates for MAC Apartments residents.", terms_en),
+  "es/index.html": page("es", "index.html", "MAC Apartments · Edinburg, Texas", "Departamentos en Edinburg, Texas. Oficina, teléfono e información para residentes.", "Tu hogar en Edinburg, Texas", "Departamentos y casas con una oficina local que te conoce por tu nombre.", home_es, small=False),
+  "es/departamentos.html": page("es", "departamentos.html", "Departamentos · MAC Apartments", "Departamentos de 2 y 3 recámaras en Edinburg, Texas: planos, características y contacto.", "Nuestros departamentos", "Hogares de 2 y 3 recámaras en Edinburg, Texas, cerca de McAllen.", apts("es")),
+  "es/privacidad.html": page("es", "privacidad.html", "Política de privacidad · MAC Apartments", "Cómo MAC Apartments recopila, usa y protege la información de residentes, incluidos los mensajes de texto.", "Política de privacidad", "Cómo recopilamos, usamos y protegemos tu información.", privacy_es),
+  "es/terminos-sms.html": page("es", "terminos-sms.html", "Términos SMS · MAC Apartments", "Términos de los mensajes de texto de MAC Apartments: qué enviamos, frecuencia, costo, STOP y HELP.", "Términos SMS", "Avisos por mensaje de texto para residentes de MAC Apartments.", terms_es),
+}
+for name, html in files.items():
+  (OUT / name).write_text(html, encoding="utf-8")
+(OUT / ".nojekyll").write_text("")
+(OUT / "404.html").write_text(files["index.html"].replace('href="index.html" aria-current="page"', 'href="index.html"'), encoding="utf-8")
+print("wrote", len(files) + 2, "files")
