@@ -30,7 +30,8 @@ def page(lng, file, title, desc, hero_h1, hero_p, body, small=True):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="icon" href="{r}assets/icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{r}assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="{r}assets/icon.png">
 <link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -46,7 +46,7 @@ a { color: var(--blue); }
 .top { background: var(--hero); color: #fff; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -0.01em; }
-.brand img { width: 40px; height: 40px; border-radius: 12px; }
+.brand img { width: 44px; height: 44px; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); }
 .links { display: flex; gap: 6px; flex-wrap: wrap; }
 .links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 999px; }
 .links a:hover, .links a[aria-current="page"] { background: rgba(255, 255, 255, 0.16); }
