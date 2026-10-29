@@ -11,11 +11,11 @@ UPDATED_EN = "October 28, 2026"
 UPDATED_ES = "28 de octubre de 2026"
 
 T = {
-  "en": dict(lang="en", root="", home="index.html", apts="apartments.html", privacy="privacy.html", terms="sms-terms.html",
-             nav=("Home", "Privacy", "SMS terms", "Apartments"), other="Español", other_href={"index.html": "es/index.html", "apartments.html": "es/departamentos.html", "privacy.html": "es/privacidad.html", "sms-terms.html": "es/terminos-sms.html", "sms-consent.html": "es/consentimiento-sms.html"},
+  "en": dict(lang="en", root="", home="index.html", apts="apartments.html", privacy="privacy.html", terms="terms.html",
+             nav=("Home", "Privacy Policy", "Terms", "Apartments"), other="Español", other_href={"index.html": "es/index.html", "apartments.html": "es/departamentos.html", "privacy.html": "es/privacidad.html", "terms.html": "es/terminos.html", "sms-consent.html": "es/consentimiento-sms.html"},
              foot="MAC Apartments is operated by ACFLP."),
-  "es": dict(lang="es", root="../", home="index.html", apts="departamentos.html", privacy="privacidad.html", terms="terminos-sms.html",
-             nav=("Inicio", "Privacidad", "Términos SMS", "Departamentos"), other="English", other_href={"index.html": "../index.html", "departamentos.html": "../apartments.html", "privacidad.html": "../privacy.html", "terminos-sms.html": "../sms-terms.html", "consentimiento-sms.html": "../sms-consent.html"},
+  "es": dict(lang="es", root="../", home="index.html", apts="departamentos.html", privacy="privacidad.html", terms="terminos.html",
+             nav=("Inicio", "Privacidad", "Términos", "Departamentos"), other="English", other_href={"index.html": "../index.html", "departamentos.html": "../apartments.html", "privacidad.html": "../privacy.html", "terminos.html": "../terms.html", "consentimiento-sms.html": "../sms-consent.html"},
              foot="MAC Apartments es operado por ACFLP."),
 }
 
@@ -253,8 +253,8 @@ home_en = f"""  <div class="grid">
   <section class="card">
     <p class="eyebrow">For residents</p>
     <h2>Text message updates</h2>
-    <p>Residents who agree on their lease or with the office can receive text messages from MAC Apartments about their home: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations and building notices.</p>
-    <p>Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out or <strong>HELP</strong> for help. Agreeing to texts is never a condition of renting. See our <a href="sms-terms.html">SMS terms</a> and <a href="privacy.html">privacy policy</a>.</p>
+    <p>Residents who sign our <a href="sms-consent.html">SMS consent form</a> at the office can receive text messages from MAC Apartments about their home: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations and building notices.</p>
+    <p>Message frequency varies (usually up to 4 per month). Message and data rates may apply. Reply <strong>STOP</strong> to opt out or <strong>HELP</strong> for help. Agreeing to texts is never a condition of renting. See our <a href="terms.html">SMS terms</a> and <a href="privacy.html">privacy policy</a>.</p>
   </section>"""
 
 privacy_en = f"""  <article class="card legal">
@@ -278,9 +278,9 @@ privacy_en = f"""  <article class="card legal">
     </ul>
 
     <h2>Text messages (SMS)</h2>
-    <p>If you agree to receive text messages, we use your mobile number only to send you messages about your tenancy, as described in our <a href="sms-terms.html">SMS terms</a>.</p>
+    <p>If you agree to receive text messages, we use your mobile number only to send you messages about your tenancy, as described in our <a href="terms.html">SMS terms</a>.</p>
     <div class="note">
-      <p><strong>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Text messaging opt-in data and consent are not shared with any third party, except with the messaging service providers that deliver our messages.</p>
+      <p><strong>We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes.</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Text messaging opt-in data and consent are not shared with any third party, except with the messaging service providers that deliver our messages.</p>
     </div>
     <p>You can stop text messages at any time by replying <strong>STOP</strong>.</p>
 
@@ -313,34 +313,40 @@ privacy_en = f"""  <article class="card legal">
 
 terms_en = f"""  <article class="card legal">
     <p class="muted">Last updated: {UPDATED_EN}</p>
+    <p>These Terms &amp; Conditions apply to the MAC Apartments website and to the MAC Apartments text message program. MAC Apartments is operated by ACFLP, {ADDR}.</p>
 
-    <h2>Program</h2>
+    <h2>Use of this website</h2>
+    <p>This website gives general information about MAC Apartments and our apartments. Prices, availability and features can change; please confirm with the office before you rely on them. Your lease is the agreement that governs your tenancy.</p>
+
+    <h2 id="sms">SMS Terms</h2>
+
+    <h3>Program</h3>
     <p><strong>MAC Apartments resident notices</strong>, sent by MAC Apartments (operated by ACFLP) to current residents.</p>
 
-    <h2>What we send</h2>
+    <h3>What we send</h3>
     <p>Informational messages about your home: maintenance and work-order updates, scheduled service interruptions (water, power, pest control), payment confirmations, office hours and building notices. We do not send marketing messages.</p>
 
-    <h2>How you sign up</h2>
-    <p>You give your mobile number on your lease or rental application, or to the office, and agree to this statement:</p>
-    <div class="note"><p>“I agree to receive text messages from MAC Apartments about my tenancy, maintenance and building notices. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help.”</p></div>
-    <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service. See the <a href="sms-consent.html">SMS consent form</a> residents sign.</p>
+    <h3>How you sign up</h3>
+    <p>You sign up in writing at the leasing office by completing our <a href="sms-consent.html">SMS Text Message Consent Form</a>: you give your mobile number, check the consent box and sign and date the form. The consent box reads:</p>
+    <div class="note"><p>“I consent to receive text messages from MAC Apartments as described above. I understand that consent is not required to rent an apartment or to receive any service.”</p></div>
+    <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service.</p>
 
-    <h2>Message frequency</h2>
+    <h3>Message frequency</h3>
     <p>Message frequency varies, usually up to 4 messages per month.</p>
 
-    <h2>Cost</h2>
+    <h3>Cost</h3>
     <p>Message and data rates may apply, according to your mobile plan. MAC Apartments does not charge for text messages.</p>
 
-    <h2>Stop messages</h2>
+    <h3>Stop messages</h3>
     <p>Reply <strong>STOP</strong> (or ALTO) to any message to stop receiving texts. We will send one message confirming you have been unsubscribed, and you will receive no further texts unless you reply <strong>START</strong> to sign up again.</p>
 
-    <h2>Help</h2>
+    <h3>Help</h3>
     <p>Reply <strong>HELP</strong> (or AYUDA) for help, call <a href="tel:{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
-    <h2>Carriers</h2>
+    <h3>Carriers</h3>
     <p>Mobile carriers are not liable for delayed or undelivered messages.</p>
 
-    <h2>Privacy</h2>
+    <h3>Privacy</h3>
     <p>See our <a href="privacy.html">privacy policy</a>. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</p>
   </article>"""
 
@@ -360,8 +366,8 @@ home_es = f"""  <div class="grid">
   <section class="card">
     <p class="eyebrow">Para residentes</p>
     <h2>Avisos por mensaje de texto</h2>
-    <p>Los residentes que lo aceptan en su contrato o en la oficina pueden recibir mensajes de texto de MAC Apartments sobre su hogar: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago y avisos del edificio.</p>
-    <p>La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde <strong>STOP</strong> para no recibir más o <strong>HELP</strong> para ayuda. Aceptar mensajes nunca es condición para rentar. Consulta nuestros <a href="terminos-sms.html">términos SMS</a> y nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+    <p>Los residentes que firman nuestro <a href="consentimiento-sms.html">formulario de consentimiento SMS</a> en la oficina pueden recibir mensajes de texto de MAC Apartments sobre su hogar: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago y avisos del edificio.</p>
+    <p>La frecuencia de los mensajes varía (normalmente hasta 4 al mes). Pueden aplicarse tarifas de mensajes y datos. Responde <strong>STOP</strong> para no recibir más o <strong>HELP</strong> para ayuda. Aceptar mensajes nunca es condición para rentar. Consulta nuestros <a href="terminos.html">términos SMS</a> y nuestra <a href="privacidad.html">política de privacidad</a>.</p>
   </section>"""
 
 privacy_es = f"""  <article class="card legal">
@@ -385,9 +391,9 @@ privacy_es = f"""  <article class="card legal">
     </ul>
 
     <h2>Mensajes de texto (SMS)</h2>
-    <p>Si aceptas recibir mensajes de texto, usamos tu número de celular solo para enviarte mensajes sobre tu renta, como se describe en nuestros <a href="terminos-sms.html">términos SMS</a>.</p>
+    <p>Si aceptas recibir mensajes de texto, usamos tu número de celular solo para enviarte mensajes sobre tu renta, como se describe en nuestros <a href="terminos.html">términos SMS</a>.</p>
     <div class="note">
-      <p><strong>No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción.</strong> Los datos y el consentimiento de suscripción a mensajes de texto no se comparten con ningún tercero, excepto con los proveedores que entregan nuestros mensajes.</p>
+      <p><strong>No vendemos ni compartimos tus datos de suscripción a SMS ni tu información personal con terceros con fines de mercadotecnia.</strong> No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción. Los datos y el consentimiento de suscripción a mensajes de texto no se comparten con ningún tercero, excepto con los proveedores que entregan nuestros mensajes.</p>
     </div>
     <p>Puedes dejar de recibir mensajes en cualquier momento respondiendo <strong>STOP</strong>.</p>
 
@@ -420,34 +426,40 @@ privacy_es = f"""  <article class="card legal">
 
 terms_es = f"""  <article class="card legal">
     <p class="muted">Última actualización: {UPDATED_ES}</p>
+    <p>Estos Términos y Condiciones aplican al sitio web de MAC Apartments y al programa de mensajes de texto de MAC Apartments. MAC Apartments es operado por ACFLP, {ADDR}.</p>
 
-    <h2>Programa</h2>
+    <h2>Uso de este sitio web</h2>
+    <p>Este sitio web da información general sobre MAC Apartments y nuestros departamentos. Los precios, la disponibilidad y las características pueden cambiar; confírmalos con la oficina antes de tomarlos en cuenta. Tu contrato de arrendamiento es el acuerdo que rige tu renta.</p>
+
+    <h2 id="sms">Términos SMS</h2>
+
+    <h3>Programa</h3>
     <p><strong>Avisos a residentes de MAC Apartments</strong>, enviados por MAC Apartments (operado por ACFLP) a sus residentes actuales.</p>
 
-    <h2>Qué enviamos</h2>
+    <h3>Qué enviamos</h3>
     <p>Mensajes informativos sobre tu hogar: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios (agua, luz, fumigación), confirmaciones de pago, horario de oficina y avisos del edificio. No enviamos mensajes de mercadotecnia.</p>
 
-    <h2>Cómo te suscribes</h2>
-    <p>Das tu número de celular en tu contrato o solicitud de renta, o en la oficina, y aceptas esta declaración:</p>
-    <div class="note"><p>“Acepto recibir mensajes de texto de MAC Apartments sobre mi renta, mantenimiento y avisos del edificio. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde STOP para no recibir más, HELP para ayuda.”</p></div>
-    <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio. Consulta el <a href="consentimiento-sms.html">formulario de consentimiento SMS</a> que firman los residentes.</p>
+    <h3>Cómo te suscribes</h3>
+    <p>Te suscribes por escrito en la oficina llenando nuestro <a href="consentimiento-sms.html">formulario de consentimiento para mensajes de texto</a>: das tu número de celular, marcas la casilla de consentimiento y firmas y fechas el formulario. La casilla dice:</p>
+    <div class="note"><p>“Doy mi consentimiento para recibir mensajes de texto de MAC Apartments como se describe arriba. Entiendo que el consentimiento no es requisito para rentar un departamento ni para recibir ningún servicio.”</p></div>
+    <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio.</p>
 
-    <h2>Frecuencia</h2>
+    <h3>Frecuencia</h3>
     <p>La frecuencia de los mensajes varía, normalmente hasta 4 mensajes al mes.</p>
 
-    <h2>Costo</h2>
+    <h3>Costo</h3>
     <p>Pueden aplicarse tarifas de mensajes y datos según tu plan. MAC Apartments no cobra por los mensajes de texto.</p>
 
-    <h2>Dejar de recibir mensajes</h2>
+    <h3>Dejar de recibir mensajes</h3>
     <p>Responde <strong>STOP</strong> (o ALTO) a cualquier mensaje para dejar de recibirlos. Te enviaremos un mensaje confirmando la baja y no recibirás más, a menos que respondas <strong>START</strong> para suscribirte otra vez.</p>
 
-    <h2>Ayuda</h2>
+    <h3>Ayuda</h3>
     <p>Responde <strong>HELP</strong> (o AYUDA), llama al <a href="tel:{TEL}">{PHONE}</a> o escribe a <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
-    <h2>Compañías telefónicas</h2>
+    <h3>Compañías telefónicas</h3>
     <p>Las compañías telefónicas no son responsables por mensajes retrasados o no entregados.</p>
 
-    <h2>Privacidad</h2>
+    <h3>Privacidad</h3>
     <p>Consulta nuestra <a href="privacidad.html">política de privacidad</a>. No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción.</p>
   </article>"""
 
@@ -460,7 +472,7 @@ def consent(lng):
                 ("Message frequency", "Message frequency varies, usually up to 4 messages per month."),
                 ("Standard rates", "Message and data rates may apply depending on your mobile phone plan."),
                 ("Help &amp; Stop", "Reply HELP for help or STOP to cancel at any time. You can also call the office at " + PHONE + "."),
-                ("Terms &amp; Privacy", "Visit macapartmentstexas.com/sms-terms.html for the SMS Terms and macapartmentstexas.com/privacy.html for the Privacy Policy.")],
+                ("Terms &amp; Privacy", "Visit macapartmentstexas.com/terms.html for the SMS Terms and macapartmentstexas.com/privacy.html for the Privacy Policy.")],
       agree="I consent to receive text messages from MAC Apartments as described above. I understand that consent is not required to rent an apartment or to receive any service.",
       sign="Resident signature*", date="Date*", office="Office use only", recv="Received by", entered="Entered in system on")
   else:
@@ -470,7 +482,7 @@ def consent(lng):
                 ("Frecuencia", "La frecuencia de los mensajes varía, normalmente hasta 4 mensajes al mes."),
                 ("Tarifas", "Pueden aplicarse tarifas de mensajes y datos según tu plan de celular."),
                 ("Ayuda y baja", "Responde HELP para ayuda o STOP para cancelar en cualquier momento. También puedes llamar a la oficina al " + PHONE + "."),
-                ("Términos y privacidad", "Consulta macapartmentstexas.com/es/terminos-sms.html para los Términos SMS y macapartmentstexas.com/es/privacidad.html para la Política de privacidad.")],
+                ("Términos y privacidad", "Consulta macapartmentstexas.com/es/terminos.html para los Términos SMS y macapartmentstexas.com/es/privacidad.html para la Política de privacidad.")],
       agree="Doy mi consentimiento para recibir mensajes de texto de MAC Apartments como se describe arriba. Entiendo que el consentimiento no es requisito para rentar un departamento ni para recibir ningún servicio.",
       sign="Firma del residente*", date="Fecha*", office="Solo para la oficina", recv="Recibido por", entered="Registrado en el sistema el")
   secs = "".join(f"<p><strong>{h}:</strong> {t}</p>" for h, t in L["sections"])
@@ -499,17 +511,20 @@ def consent(lng):
 files = {
   "index.html": page("en", "index.html", "MAC Apartments · Edinburg, Texas", "Apartment homes in Edinburg, Texas. Office, phone and resident information.", "Your home in Edinburg, Texas", "Apartment homes and houses with a local office that knows you by name.", home_en, small=False),
   "apartments.html": page("en", "apartments.html", "Apartments · MAC Apartments", "2 and 3 bedroom apartments for rent in Edinburg, Texas: gated community, washer and dryer included, from $1,100 a month. Photos, features and contact.", "Our apartments", "Apartments for rent in Edinburg, Texas, near McAllen.", apts("en")),
-  "privacy.html": page("en", "privacy.html", "Privacy policy · MAC Apartments", "How MAC Apartments collects, uses and protects resident information, including text messages.", "Privacy policy", "How we collect, use and protect your information.", privacy_en),
-  "sms-terms.html": page("en", "sms-terms.html", "SMS terms · MAC Apartments", "Terms for MAC Apartments resident text messages: what we send, frequency, cost, STOP and HELP.", "SMS terms", "Text message updates for MAC Apartments residents.", terms_en),
+  "privacy.html": page("en", "privacy.html", "Privacy Policy · MAC Apartments", "How MAC Apartments collects, uses and protects resident information, including text messages.", "Privacy Policy", "How we collect, use and protect your information.", privacy_en),
+  "terms.html": page("en", "terms.html", "Terms & Conditions · MAC Apartments", "MAC Apartments Terms & Conditions, including the SMS Terms for resident text messages: what we send, frequency, message and data rates, STOP and HELP.", "Terms &amp; Conditions", "Website terms and SMS Terms for MAC Apartments residents.", terms_en),
   "sms-consent.html": page("en", "sms-consent.html", "SMS consent form · MAC Apartments", "The form MAC Apartments residents sign to agree to receive text messages.", "SMS consent form", "How residents agree to receive text messages.", consent("en")),
   "es/index.html": page("es", "index.html", "MAC Apartments · Edinburg, Texas", "Departamentos en Edinburg, Texas. Oficina, teléfono e información para residentes.", "Tu hogar en Edinburg, Texas", "Departamentos y casas con una oficina local que te conoce por tu nombre.", home_es, small=False),
   "es/departamentos.html": page("es", "departamentos.html", "Departamentos · MAC Apartments", "Departamentos de 2 y 3 recámaras en renta en Edinburg, Texas: comunidad cerrada, lavadora y secadora incluidas, desde $1,100 al mes. Fotos, características y contacto.", "Nuestros departamentos", "Departamentos en renta en Edinburg, Texas, cerca de McAllen.", apts("es")),
   "es/privacidad.html": page("es", "privacidad.html", "Política de privacidad · MAC Apartments", "Cómo MAC Apartments recopila, usa y protege la información de residentes, incluidos los mensajes de texto.", "Política de privacidad", "Cómo recopilamos, usamos y protegemos tu información.", privacy_es),
-  "es/terminos-sms.html": page("es", "terminos-sms.html", "Términos SMS · MAC Apartments", "Términos de los mensajes de texto de MAC Apartments: qué enviamos, frecuencia, costo, STOP y HELP.", "Términos SMS", "Avisos por mensaje de texto para residentes de MAC Apartments.", terms_es),
+  "es/terminos.html": page("es", "terminos.html", "Términos y Condiciones · MAC Apartments", "Términos y Condiciones de MAC Apartments, incluidos los Términos SMS: qué enviamos, frecuencia, tarifas, STOP y HELP.", "Términos y Condiciones", "Términos del sitio web y Términos SMS para residentes de MAC Apartments.", terms_es),
   "es/consentimiento-sms.html": page("es", "consentimiento-sms.html", "Consentimiento SMS · MAC Apartments", "El formulario que firman los residentes de MAC Apartments para aceptar mensajes de texto.", "Consentimiento SMS", "Cómo aceptan los residentes recibir mensajes de texto.", consent("es")),
 }
 for name, html in files.items():
   (OUT / name).write_text(html, encoding="utf-8")
 (OUT / ".nojekyll").write_text("")
+redirect = lambda to: f'<!doctype html><meta charset="utf-8"><title>Terms &amp; Conditions · MAC Apartments</title><link rel="canonical" href="{to}"><meta http-equiv="refresh" content="0; url={to}"><a href="{to}">Terms &amp; Conditions</a>'
+(OUT / "sms-terms.html").write_text(redirect("terms.html#sms"), encoding="utf-8")
+(OUT / "es" / "terminos-sms.html").write_text(redirect("terminos.html#sms"), encoding="utf-8")
 (OUT / "404.html").write_text(files["index.html"].replace('href="index.html" aria-current="page"', 'href="index.html"'), encoding="utf-8")
 print("wrote", len(files) + 2, "files")
