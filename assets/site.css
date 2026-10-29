@@ -134,3 +134,25 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .price .ask { font-size: 22px; }
 .gallery-note { margin: 4px 0 0; }
 @media (max-width: 420px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+
+/* SMS consent form (printable) */
+.consent-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.consent-head img { border-radius: 12px; border: 1px solid var(--line); }
+.consent .btn { border: 0; font: inherit; font-weight: 700; cursor: pointer; margin: 4px 0 20px; }
+.fields { display: flex; flex-wrap: wrap; gap: 18px 24px; margin: 18px 0; }
+.line { flex: 1 1 100%; border-bottom: 1.5px solid var(--text); }
+.line.half { flex: 1 1 260px; }
+.line span { display: block; font-size: 13px; color: var(--muted); padding-bottom: 30px; }
+.choice { flex: 1 1 100%; margin: 0; font-size: 15px; }
+.fields + .fields, .agree { margin-top: 36px; }
+.agree { display: flex; gap: 10px; font-weight: 600; }
+.agree .box { font-size: 24px; line-height: 1; }
+.small { font-size: 14px; }
+.office { margin-top: 40px; padding: 16px; border: 1px dashed var(--line); border-radius: 12px; }
+@media print {
+  .top, footer, .no-print { display: none !important; }
+  body { background: #fff; color: #000; font-size: 13pt; }
+  main.lift { margin-top: 0; padding: 0; }
+  .card { box-shadow: none; padding: 0; }
+  .line { border-color: #000; }
+}

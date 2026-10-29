@@ -12,10 +12,10 @@ UPDATED_ES = "28 de octubre de 2026"
 
 T = {
   "en": dict(lang="en", root="", home="index.html", apts="apartments.html", privacy="privacy.html", terms="sms-terms.html",
-             nav=("Home", "Privacy", "SMS terms", "Apartments"), other="Español", other_href={"index.html": "es/index.html", "apartments.html": "es/departamentos.html", "privacy.html": "es/privacidad.html", "sms-terms.html": "es/terminos-sms.html"},
+             nav=("Home", "Privacy", "SMS terms", "Apartments"), other="Español", other_href={"index.html": "es/index.html", "apartments.html": "es/departamentos.html", "privacy.html": "es/privacidad.html", "sms-terms.html": "es/terminos-sms.html", "sms-consent.html": "es/consentimiento-sms.html"},
              foot="MAC Apartments is operated by ACFLP."),
   "es": dict(lang="es", root="../", home="index.html", apts="departamentos.html", privacy="privacidad.html", terms="terminos-sms.html",
-             nav=("Inicio", "Privacidad", "Términos SMS", "Departamentos"), other="English", other_href={"index.html": "../index.html", "departamentos.html": "../apartments.html", "privacidad.html": "../privacy.html", "terminos-sms.html": "../sms-terms.html"},
+             nav=("Inicio", "Privacidad", "Términos SMS", "Departamentos"), other="English", other_href={"index.html": "../index.html", "departamentos.html": "../apartments.html", "privacidad.html": "../privacy.html", "terminos-sms.html": "../sms-terms.html", "consentimiento-sms.html": "../sms-consent.html"},
              foot="MAC Apartments es operado por ACFLP."),
 }
 
@@ -323,7 +323,7 @@ terms_en = f"""  <article class="card legal">
     <h2>How you sign up</h2>
     <p>You give your mobile number on your lease or rental application, or to the office, and agree to this statement:</p>
     <div class="note"><p>“I agree to receive text messages from MAC Apartments about my tenancy, maintenance and building notices. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help.”</p></div>
-    <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service.</p>
+    <p>Agreeing to receive text messages is <strong>not a condition of renting</strong> or of any service. See the <a href="sms-consent.html">SMS consent form</a> residents sign.</p>
 
     <h2>Message frequency</h2>
     <p>Message frequency varies, usually a few messages per month.</p>
@@ -430,7 +430,7 @@ terms_es = f"""  <article class="card legal">
     <h2>Cómo te suscribes</h2>
     <p>Das tu número de celular en tu contrato o solicitud de renta, o en la oficina, y aceptas esta declaración:</p>
     <div class="note"><p>“Acepto recibir mensajes de texto de MAC Apartments sobre mi renta, mantenimiento y avisos del edificio. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde STOP para no recibir más, HELP para ayuda.”</p></div>
-    <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio.</p>
+    <p>Aceptar mensajes de texto <strong>no es condición para rentar</strong> ni para recibir ningún servicio. Consulta el <a href="consentimiento-sms.html">formulario de consentimiento SMS</a> que firman los residentes.</p>
 
     <h2>Frecuencia</h2>
     <p>La frecuencia de los mensajes varía, normalmente unos cuantos al mes.</p>
@@ -451,15 +451,53 @@ terms_es = f"""  <article class="card legal">
     <p>Consulta nuestra <a href="privacidad.html">política de privacidad</a>. No compartiremos información móvil con terceros ni afiliados con fines de mercadotecnia o promoción.</p>
   </article>"""
 
+def consent(lng):
+  r = "" if lng == "en" else "../"
+  if lng == "en":
+    L = dict(title="Text message (SMS) consent form", intro="Residents fill in and sign this form at the leasing office, or the same wording on their lease. Print it, or ask the office for a copy.",
+      print="Print this form", name="Resident name", prop="Property", unit="Unit", mobile="Mobile phone number",
+      agree="Yes, I agree to receive text messages from MAC Apartments (ACFLP) at the mobile number above about my tenancy: maintenance and work-order updates, scheduled service interruptions, payment confirmations and building notices. Message frequency varies. Message and data rates may apply. Reply STOP at any time to opt out, or HELP for help. Agreeing is not a condition of renting.",
+      links="SMS terms: macapartmentstexas.com/sms-terms.html · Privacy policy: macapartmentstexas.com/privacy.html",
+      sign="Signature", date="Date", office="Office use only", recv="Received by", entered="Entered in system on")
+  else:
+    L = dict(title="Formulario de consentimiento para mensajes de texto (SMS)", intro="Los residentes llenan y firman este formulario en la oficina, o la misma declaración en su contrato. Imprímelo o pide una copia en la oficina.",
+      print="Imprimir formulario", name="Nombre del residente", prop="Propiedad", unit="Departamento", mobile="Número de celular",
+      agree="Sí, acepto recibir mensajes de texto de MAC Apartments (ACFLP) en el número de celular anterior sobre mi renta: avisos de mantenimiento y órdenes de trabajo, cortes programados de servicios, confirmaciones de pago y avisos del edificio. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responde STOP en cualquier momento para no recibir más, o HELP para ayuda. Aceptar no es condición para rentar.",
+      links="Términos SMS: macapartmentstexas.com/es/terminos-sms.html · Privacidad: macapartmentstexas.com/es/privacidad.html",
+      sign="Firma", date="Fecha", office="Solo para la oficina", recv="Recibido por", entered="Registrado en el sistema el")
+  return f"""  <article class="card consent">
+    <div class="consent-head"><img src="{r}assets/icon.png" alt="" width="56" height="56"><div><strong>MAC Apartments</strong><br><span class="muted">{ADDR} · {PHONE}</span></div></div>
+    <h2>{L['title']}</h2>
+    <p class="muted no-print">{L['intro']}</p>
+    <button class="btn no-print" type="button" onclick="window.print()">{L['print']}</button>
+    <div class="fields">
+      <div class="line"><span>{L['name']}</span></div>
+      <p class="choice">{L['prop']}: &nbsp; ☐ 3807 S Veterans Blvd &nbsp;&nbsp; ☐ 1103 Leticia St</p>
+      <div class="line half"><span>{L['unit']}</span></div>
+      <div class="line"><span>{L['mobile']}</span></div>
+    </div>
+    <p class="agree"><span class="box">☐</span> {L['agree']}</p>
+    <p class="muted small">{L['links']}</p>
+    <div class="fields">
+      <div class="line half"><span>{L['sign']}</span></div>
+      <div class="line half"><span>{L['date']}</span></div>
+    </div>
+    <div class="office"><strong>{L['office']}</strong>
+      <div class="fields"><div class="line half"><span>{L['recv']}</span></div><div class="line half"><span>{L['entered']}</span></div></div>
+    </div>
+  </article>"""
+
 files = {
   "index.html": page("en", "index.html", "MAC Apartments · Edinburg, Texas", "Apartment homes in Edinburg, Texas. Office, phone and resident information.", "Your home in Edinburg, Texas", "Apartment homes and houses with a local office that knows you by name.", home_en, small=False),
   "apartments.html": page("en", "apartments.html", "Apartments · MAC Apartments", "2 and 3 bedroom apartments for rent in Edinburg, Texas: gated community, washer and dryer included, from $1,100 a month. Photos, features and contact.", "Our apartments", "Apartments for rent in Edinburg, Texas, near McAllen.", apts("en")),
   "privacy.html": page("en", "privacy.html", "Privacy policy · MAC Apartments", "How MAC Apartments collects, uses and protects resident information, including text messages.", "Privacy policy", "How we collect, use and protect your information.", privacy_en),
   "sms-terms.html": page("en", "sms-terms.html", "SMS terms · MAC Apartments", "Terms for MAC Apartments resident text messages: what we send, frequency, cost, STOP and HELP.", "SMS terms", "Text message updates for MAC Apartments residents.", terms_en),
+  "sms-consent.html": page("en", "sms-consent.html", "SMS consent form · MAC Apartments", "The form MAC Apartments residents sign to agree to receive text messages.", "SMS consent form", "How residents agree to receive text messages.", consent("en")),
   "es/index.html": page("es", "index.html", "MAC Apartments · Edinburg, Texas", "Departamentos en Edinburg, Texas. Oficina, teléfono e información para residentes.", "Tu hogar en Edinburg, Texas", "Departamentos y casas con una oficina local que te conoce por tu nombre.", home_es, small=False),
   "es/departamentos.html": page("es", "departamentos.html", "Departamentos · MAC Apartments", "Departamentos de 2 y 3 recámaras en renta en Edinburg, Texas: comunidad cerrada, lavadora y secadora incluidas, desde $1,100 al mes. Fotos, características y contacto.", "Nuestros departamentos", "Departamentos en renta en Edinburg, Texas, cerca de McAllen.", apts("es")),
   "es/privacidad.html": page("es", "privacidad.html", "Política de privacidad · MAC Apartments", "Cómo MAC Apartments recopila, usa y protege la información de residentes, incluidos los mensajes de texto.", "Política de privacidad", "Cómo recopilamos, usamos y protegemos tu información.", privacy_es),
   "es/terminos-sms.html": page("es", "terminos-sms.html", "Términos SMS · MAC Apartments", "Términos de los mensajes de texto de MAC Apartments: qué enviamos, frecuencia, costo, STOP y HELP.", "Términos SMS", "Avisos por mensaje de texto para residentes de MAC Apartments.", terms_es),
+  "es/consentimiento-sms.html": page("es", "consentimiento-sms.html", "Consentimiento SMS · MAC Apartments", "El formulario que firman los residentes de MAC Apartments para aceptar mensajes de texto.", "Consentimiento SMS", "Cómo aceptan los residentes recibir mensajes de texto.", consent("es")),
 }
 for name, html in files.items():
   (OUT / name).write_text(html, encoding="utf-8")
